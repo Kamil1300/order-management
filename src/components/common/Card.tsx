@@ -1,9 +1,10 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Btn } from "@/components/common/Button";
+import { Item } from "@/types/item.type";
 
-export const Card = () => {
+export const Card = ({ items }: { items: Item }) => {
     const [loading, setLoading] = useState(Boolean)
 
     const handleClick = () => {
@@ -19,11 +20,11 @@ export const Card = () => {
     }
     return (
         <div className="w-80 h-100 border-2 border-[#FF6A3D] rounded-md">
-            <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="burger" src={"https://foodish-api.com/images/burger/burger2.jpg"} loading="eager" />
-            <h1 className="py-5 text-center font-bold">
-                Special Smash Burger
+            <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={items.image} loading="eager" />
+            <h1 className="py-5 text-center font-bold capitalize">
+                {items.name}
             </h1>
-            <p className="text-black px-5">Thin pressed flat onto a hot griddle to create an extra-crispy, lacy edge and a juicy interior</p>
+            <p className="text-black px-5">{items.description}</p>
             <div className="ml-60">
                 <Btn name="Buy" isLoading={loading} onClick={() => handleClick()} />
             </div>
