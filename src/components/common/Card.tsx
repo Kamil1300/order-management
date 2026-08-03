@@ -24,7 +24,7 @@ export const Card = ({ items }: { items: Item }) => {
             <h1 className="py-5 text-center font-bold capitalize">
                 {items.name} {items.is_veg ? "🟢" : "🔴"}
             </h1>
-            <p className="text-black px-5 text-ellipsis h-20">{items.description}</p>
+            <p className="text-black px-5 text-ellipsis h-20">{items.description} <span className="font-bold">in just {items.price} rupees</span></p>
             <div className="sm:ml-60 ml-55">
                 <Btn name="Buy" isLoading={loading} onClick={() => handleClick()} />
             </div>
