@@ -2,7 +2,7 @@
 
 interface ButtonPropsTypes {
     name: string,
-    isLoading: boolean,
+    isLoading?: boolean,
     onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 

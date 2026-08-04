@@ -3,7 +3,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Card } from "@/components/common/Card";
+import { Card } from "@/components/item/Card";
 
 // Mock next/image
 vi.mock("next/image", () => ({
