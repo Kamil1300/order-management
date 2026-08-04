@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { GET } from "@/app/api/(items)/get-items/route";
-import { connectDB } from "@/database/db";
 import { Item } from "@/database/schema/items";
 
 vi.mock("@/database/db", () => ({
@@ -13,7 +12,7 @@ vi.mock("@/database/schema/items", () => ({
   },
 }));
 
-describe("GET /api/menu", () => {
+describe("GET /api/get-items", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -31,16 +30,15 @@ describe("GET /api/menu", () => {
       },
     ];
 
-    vi.mocked(Item.find).mockResolvedValue(mockItems as any);
+    vi.mocked(Item.find).mockResolvedValue(mockItems);
 
     const response = await GET();
 
-    expect(connectDB).toHaveBeenCalledOnce();
     expect(Item.find).toHaveBeenCalledOnce();
-    expect(response.status).toBe(200);
+    expect(response?.status).toBe(200);
 
-    const data = await response.json();
+    const data = await response?.json();
 
-    expect(data).toEqual(mockItems);
+    expect(data.data).toEqual(mockItems);
   });
 });

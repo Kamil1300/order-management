@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { Card } from "@/components/item/Card";
+const pushMock = vi.fn();
 
 // Mock next/image
 vi.mock("next/image", () => ({
@@ -15,6 +16,12 @@ vi.mock("@/components/common/Button", () => ({
   Btn: ({ name, onClick }: any) => (
     <button onClick={onClick}>{name}</button>
   ),
+}));
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
 }));
 
 describe("Card", () => {
@@ -38,18 +45,15 @@ describe("Card", () => {
     ).toBeInTheDocument();
   });
 
-  it("Buy button is clickable", async () => {
-    const user = userEvent.setup();
-    const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+  it("navigates to cart page when Buy button is clicked", async () => {
+  const user = userEvent.setup();
 
-    render(<Card items={item} />);
+  render(<Card items={item} />);
 
-    await user.click(
-      screen.getByRole("button", { name: /buy/i })
-    );
+  await user.click(
+    screen.getByRole("button", { name: /buy/i })
+  );
 
-    expect(logSpy).toHaveBeenCalledWith("1");
-
-    logSpy.mockRestore();
-  });
+  expect(pushMock).toHaveBeenCalledWith(`cart/${item._id}`);
+});
 });

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export const Card = ({ items }: { items: Item }) => {
     const [loading, setLoading] = useState<boolean>(false)
-    const url = process.env.NEXT_PUBLIC_FRONTEND_URL
+
     const router = useRouter()
     return (
         <div className="w-80 h-100 rounded-md border-4 border-black">
@@ -17,7 +17,7 @@ export const Card = ({ items }: { items: Item }) => {
             </h1>
             <p className="text-black px-5 text-ellipsis h-20">{items?.description} <span className="font-bold">in just {items?.price} rupees</span></p>
             <div className="sm:ml-60 ml-55">
-                <Btn name="Buy" isLoading={loading} onClick={() => router.push(`${url}/cart/${items?._id}`)} />
+                <Btn name="Buy" isLoading={loading} onClick={() => router.push(`cart/${items?._id}`)} />
             </div>
         </div>
     )
