@@ -1,7 +1,7 @@
 import { getItems } from "@/base-api/items";
 import { Card } from "@/components/common/Card"
 import { Item } from "@/types/item.type";
-export default async function Home() {
+export default async function Items() {
   const items = await getItems()
   return (
     <div>

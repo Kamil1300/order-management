@@ -5,10 +5,11 @@ import { Btn } from "@/components/common/Button";
 import { Item } from "@/types/item.type";
 
 export const Card = ({ items }: { items: Item }) => {
-    const [loading, setLoading] = useState(Boolean)
+    const [loading, setLoading] = useState<boolean>(false)
 
-    const handleClick = () => {
+    const handleClick = (id: string) => {
         setLoading(true)
+        console.log(id)
         try {
             setTimeout(() => {
                 console.log("Yes Working")
@@ -26,7 +27,7 @@ export const Card = ({ items }: { items: Item }) => {
             </h1>
             <p className="text-black px-5 text-ellipsis h-20">{items.description} <span className="font-bold">in just {items.price} rupees</span></p>
             <div className="sm:ml-60 ml-55">
-                <Btn name="Buy" isLoading={loading} onClick={() => handleClick()} />
+                <Btn name="Buy" isLoading={loading} onClick={() => handleClick(items._id)} />
             </div>
         </div>
     )
