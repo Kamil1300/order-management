@@ -10,7 +10,7 @@ export default function ItemModel({ open, setOpen, item, count }: { open: boolea
         <div className="fixed inset-0 bg-black/40 backdrop-blur flex items-center justify-center">
             <div className="bg-[#F9F6F2] rounded-lg p-6 w-[400px] rounded-md border-4 border-black">
                 <div className="text-black font-bold text-right cursor-pointer text-xl" onClick={() => setOpen(false)}>X</div>
-                <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={item?.image} loading="lazy" />
+                <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={item?.image} loading="lazy" unoptimized/>
                 <h1 className="py-5 text-center font-bold capitalize">
                     {item?.name} {item?.is_veg ? "🟢" : "🔴"}
                 </h1>

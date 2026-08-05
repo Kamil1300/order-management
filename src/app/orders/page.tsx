@@ -11,7 +11,6 @@ const Orders = async () => {
     const hasActiveOrders:boolean = orders?.some(order =>
         activeStatuses.includes(order?.status)
     );
-    console.log(hasActiveOrders)
     return (
         <div className="flex mx-30 mb-20 mt-10 font-sans flex-wrap gap-10 justify-center items-center">
             {orders ? orders?.map((o: OrderType) => (

@@ -12,7 +12,7 @@ export const Order = ({ orders, enabled }: { orders: OrderType, enabled: boolean
     const [item, setItem] = useState<Item>()
     const [open, setOpen] = useState(false)
     const router = useRouter()
-    console.log(orders, "Here")
+
     const statusColor: Record<string, string> = {
         "Order Received": "text-blue-600",
         "Preparing": "text-yellow-600",

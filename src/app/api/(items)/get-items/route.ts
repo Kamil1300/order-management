@@ -20,10 +20,9 @@ export const POST = async (req: NextRequest) => {
         if (!id) {
             return NextResponse.json({ message: "Id not found", status: 400 })
         }
-        console.log(id, "id is here")
         const item = await Item.findOne({ _id: id })
         return NextResponse.json({ data: item, status: 200 })
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
