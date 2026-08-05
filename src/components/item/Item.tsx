@@ -11,7 +11,7 @@ export default function Item({items} : {items:ItemType[]}) {
         <div>
             <div className="text-center pt-8 font-extrabold text-2xl text-black">
                 <h1>RaftLab's Special Canteen</h1>
-                <Btn name="My Orders" onClick={() => router.push("orders")} />
+                <Btn name="My Orders" onClick={() => router.push("/orders")} />
             </div>
             {/* Burgers  */}
             <h3 className="text-center mt-15 font-extrabold text-xl text-black">Burgers🍔</h3>

@@ -6,6 +6,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Cart } from "@/components/cart/Cart";
 import { getItemById } from "@/base-api/items";
 
+const pushMock = vi.fn();
+
 // Mock next/image
 vi.mock("next/image", () => ({
   default: (props: any) => <img {...props} />,
@@ -23,13 +25,21 @@ vi.mock("@/base-api/items", () => ({
   getItemById: vi.fn(),
 }));
 
-// Prevent modal API errors
-vi.mock("@/base-api/order", () => ({
-  createOrder: vi.fn(),
-}));
-
 vi.mock("sonner", () => ({
   toast: vi.fn(),
+}));
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
+}));
+
+vi.mock("@/base-api/order", () => ({
+  createOrder: vi.fn().mockResolvedValue({
+    status: 200,
+    message: "Order placed successfully",
+  }),
 }));
 
 describe("Cart", () => {
@@ -114,4 +124,40 @@ describe("Cart", () => {
       screen.getByPlaceholderText(/address/i)
     ).toBeInTheDocument();
   });
+
+it("navigates to orders page after placing an order", async () => {
+  const user = userEvent.setup();
+
+  render(<Cart id="1" />);
+
+  await screen.findByText("Cheese Burst Pizza");
+
+  // Open checkout modal
+  await user.click(
+    screen.getByRole("button", { name: /check out/i })
+  );
+
+  // Fill form
+  await user.type(
+    screen.getByPlaceholderText(/your name/i),
+    "John Doe"
+  );
+
+  await user.type(
+    screen.getByPlaceholderText(/phone number/i),
+    "9876543210"
+  );
+
+  await user.type(
+    screen.getByPlaceholderText(/address/i),
+    "123 Main Street"
+  );
+
+  // Place order
+  await user.click(
+    screen.getByRole("button", { name: /place order/i })
+  );
+
+  expect(pushMock).toHaveBeenCalledWith("/orders");
+});
 });

@@ -54,6 +54,6 @@ describe("Card", () => {
     screen.getByRole("button", { name: /buy/i })
   );
 
-  expect(pushMock).toHaveBeenCalledWith(`cart/${item._id}`);
+  expect(pushMock).toHaveBeenCalledWith(`/cart/${item._id}`);
 });
 });

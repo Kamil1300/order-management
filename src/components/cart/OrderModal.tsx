@@ -6,10 +6,13 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { createOrder } from "@/base-api/order";
 import { Order } from "@/types/order.type";
+import { useRouter } from "next/navigation";
 
 export default function OrderModal({ open, setOpen, item, count }: { open: boolean, setOpen: React.Dispatch<React.SetStateAction<boolean>>, item: Item, count: number }) {
     if (!open || !item) return null;
     const [formData, setFormData] = useState<Order>({ user_name: "", phone: "", address: "", total_item: count, cost: item.price * count, item_id: item._id})
+
+    const router = useRouter()
 
     const handleOrderPlacement = async () => {
         if (!formData.user_name.trim()) {
@@ -30,6 +33,7 @@ export default function OrderModal({ open, setOpen, item, count }: { open: boole
         if(res){
             setOpen(false)
             toast("Order create successfully")
+            router.push("/orders")
         }else{
             toast("Some data are missing")
         }

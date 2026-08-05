@@ -8,7 +8,7 @@ export const POST = async (req: NextRequest) => {
         if (!user_name || !phone || !address || !total_item || !cost) {
             return NextResponse.json({ message: "Some information's are missing", status: 400 })
         }
-        console.log(user_name, "From backend")
+        
         const order = new Order({
             user_name,
             phone,
