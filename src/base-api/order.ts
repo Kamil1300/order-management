@@ -13,7 +13,13 @@ export const createOrder = async (orderData: Order) => {
 
 export const getOrders = async () => {
     try {
-        const response = await axios.get(`${baseUrl}/order`)
+        const response = await axios.get(`${baseUrl}/order`, {
+            headers: {
+                "Cache-Control": "no-cache",
+            },
+            params: {
+                t: Date.now()
+            })
         return response.data.data
     } catch (error) {
         console.error(error)

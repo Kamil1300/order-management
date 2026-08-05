@@ -1,6 +1,7 @@
 import { getOrders } from "@/base-api/order"
 import { Order } from "@/components/order/Order"
 import { Order as OrderType } from "@/types/order.type"
+export const dynamic = "force-dynamic";
 const Orders = async () => {
     const orders:OrderType[] = await getOrders()
     const activeStatuses: OrderType["status"][] = [
