@@ -19,7 +19,6 @@ export const POST = async (req: NextRequest) => {
         })
 
         const saveOrder = await order.save()
-        console.log("🚀 ~ POST ~ saveOrder:", saveOrder)
         return NextResponse.json({ data: saveOrder, status: 200 })
     } catch (error) {
         console.error(error)
@@ -45,7 +44,6 @@ export const PATCH = async (req: NextRequest) => {
             return NextResponse.json({ message: "ID is required", status: 400 })
         }
         const checkStatus = await Order.findById({ _id: id })
-        console.log("🚀 ~ PATCH ~ checkStatus:", checkStatus)
         if (checkStatus.status == "Cancelled") {
             return NextResponse.json({ message: "Order is already Cancelled", status: 200 })
         }
