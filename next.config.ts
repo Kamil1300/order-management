@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   /* config options here */
    images: {
     remotePatterns: [
-      new URL('https://foodish-api.com/**'),
+       {
+       protocol:"https",
+       hostname:"foodish-api.com",
+     }
     ],
     qualities: [25, 50, 75,100],
   },
