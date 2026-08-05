@@ -44,6 +44,11 @@ export const PATCH = async (req: NextRequest) => {
         if (!id) {
             return NextResponse.json({ message: "ID is required", status: 400 })
         }
+        const checkStatus = await Order.findById({_id:id})
+        console.log("🚀 ~ PATCH ~ checkStatus:", checkStatus)
+        if(checkStatus.status == "Cancelled"){
+            return NextResponse.json({ message: "Order is already Cancelled", status: 200 })
+        }
         const status = await Order.findByIdAndUpdate(
             { _id: id },
             { status: "Cancelled" },

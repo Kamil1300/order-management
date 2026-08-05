@@ -13,6 +13,13 @@ export const Order = ({ orders }: { orders: OrderType }) => {
     const [open, setOpen] = useState(false)
     const router = useRouter()
     console.log(orders, "Here")
+    const statusColor: Record<string, string> = {
+        "Order Received": "text-blue-600",
+        "Preparing": "text-yellow-600",
+        "Out for Delivery": "text-purple-600",
+        "Delivered": "text-green-600",
+        "Cancelled": "text-red-600",
+    };
     useEffect(() => {
         const item = async () => {
             const response = await getItemById(orders?.item_id)
@@ -27,7 +34,7 @@ export const Order = ({ orders }: { orders: OrderType }) => {
     const handleCancelOrder = async (id: string) => {
         const response = await cancelOrder(id)
         if (response.status = 200) {
-            toast("Order Cancel successfully")
+            toast(response.message)
             router.refresh()
         } else {
             toast("Oops! Something went wrong")
@@ -38,8 +45,8 @@ export const Order = ({ orders }: { orders: OrderType }) => {
             <div className="w-90 h-60 rounded-md border-4 border-black">
                 <h2 className="text-black text-center pt-2 font-bold text-md">{orders.user_name}</h2>
                 <div className="flex items-center justify-evenly">
-                    <div className="text-center pt-2 text-black">Status: {orders.status}</div>
-                    <Btn name="Cancel" onClick={() => handleCancelOrder(orders._id as string)} bgColor="bg-red-600" hover="hover:bg-red-500" />
+                    <div className="text-center pt-2 text-black">Status: <span className={`${statusColor[orders?.status ?? ""]}`}>{orders.status}</span></div>
+                    {orders?.status == "Cancelled" ? "" : <Btn name="Cancel" onClick={() => handleCancelOrder(orders._id as string)} bgColor="bg-red-600" hover="hover:bg-red-500" />}
                 </div>
                 <div className="flex items-center justify-evenly">
                     <h3 className="text-black text-center pt-2">Item: {item?.name}</h3>
