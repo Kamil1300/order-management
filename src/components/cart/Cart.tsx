@@ -39,7 +39,7 @@ export const Cart = ({ id }: { id: string }) => {
         <>
         { item ?
             <div className="w-80 h-100 rounded-md border-4 border-black">
-                <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={item?.image} loading="lazy" unoptimized/>
+                <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={item?.image} loading="lazy"/>
                 <h1 className="py-5 text-center font-bold capitalize">
                     {item?.name} {item?.is_veg ? "🟢" : "🔴"}
                 </h1>

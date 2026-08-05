@@ -11,7 +11,7 @@ export const Card = ({ items }: { items: Item }) => {
     const router = useRouter()
     return (
         <div className="w-80 h-100 rounded-md border-4 border-black">
-            <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={items?.image} loading="lazy" unoptimized/>
+            <Image className="h-50 w-80" height={1900} width={1267} quality={100} alt="image" src={items?.image} loading="lazy"/>
             <h1 className="py-5 text-center font-bold capitalize">
                 {items?.name} {items?.is_veg ? "🟢" : "🔴"}
             </h1>
