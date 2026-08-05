@@ -5,10 +5,10 @@ import { Item } from "@/types/item.type";
 import { getItemById } from "@/base-api/items";
 import ItemModel from "@/components/order/ItemModal";
 import { Order as OrderType } from "@/types/order.type";
-import { cancelOrder } from "@/base-api/order";
+import { cancelOrder, updateOrderStatus } from "@/base-api/order";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-export const Order = ({ orders }: { orders: OrderType }) => {
+export const Order = ({ orders, enabled }: { orders: OrderType, enabled: OrderType }) => {
     const [item, setItem] = useState<Item>()
     const [open, setOpen] = useState(false)
     const router = useRouter()
@@ -40,6 +40,23 @@ export const Order = ({ orders }: { orders: OrderType }) => {
             toast("Oops! Something went wrong")
         }
     }
+
+    useEffect(() => {
+        if (!enabled) return;
+
+        const updateStatus = async () => {
+            const response = await updateOrderStatus()
+            return response
+        }
+
+        const interval = setInterval(() => {
+            updateStatus()
+            router.refresh();
+        }, 5000);
+        router.refresh()
+        return () => clearInterval(interval);
+    }, [enabled]);
+
     return (
         <>
             <div className="w-90 h-60 rounded-md border-4 border-black">

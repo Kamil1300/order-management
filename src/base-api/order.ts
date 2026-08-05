@@ -28,3 +28,12 @@ export const cancelOrder = async (id:string) => {
         console.error(error)
     }
 }
+
+export const updateOrderStatus = async() => {
+    try {
+        const response = await axios.put(`${baseUrl}/order`)
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}

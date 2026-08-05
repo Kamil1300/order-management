@@ -21,6 +21,6 @@ const OrderSchema = new Schema({
         type: Number, reuqired: true
     },
     cost: { type: Number, required: true }
-})
+},{timestamps:true,})
 
 export const Order = models.Order || model("Order", OrderSchema)

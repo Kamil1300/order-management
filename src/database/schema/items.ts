@@ -7,6 +7,6 @@ const ItemSchema = new Schema({
     price: { type: Number, required: true },
     is_veg: { type: Boolean, required: true },
     type: { type: String, required: true }
-})
+},{timestamps:true})
 
 export const Item = models.Item || model("Item", ItemSchema)
