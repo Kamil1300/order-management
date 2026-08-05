@@ -9,4 +9,22 @@ export const createOrder = async (orderData: Order) => {
     } catch (error) {
         console.error(error)
     }
-} 
+}
+
+export const getOrders = async () => {
+    try {
+        const response = await axios.get(`${baseUrl}/order`)
+        return response.data.data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const cancelOrder = async (id:string) => {
+    try {
+        const response = await axios.patch(`${baseUrl}/order`,{id})
+        return response.data
+    } catch (error) {
+        console.error(error)
+    }
+}

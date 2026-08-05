@@ -6,7 +6,7 @@ export const GET = async () => {
     try {
         const items = await Item.find()
         if (items.length == 0) {
-            return NextResponse.json({ message: "Data not found", status: 404 })
+            return NextResponse.json({ message: "Data not found", status: 400 })
         }
         return NextResponse.json({ data: items, status: 200 })
     } catch (error) {
@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest) => {
     try {
         const { id } = await req.json()
         if (!id) {
-            return NextResponse.json({ message: "Id not found", status: 404 })
+            return NextResponse.json({ message: "Id not found", status: 400 })
         }
         console.log(id, "id is here")
         const item = await Item.findOne({ _id: id })
