@@ -16,7 +16,7 @@ export default function Item({items} : {items:ItemType[]}) {
             {/* Burgers  */}
             <h3 className="text-center mt-15 font-extrabold text-xl text-black">Burgers🍔</h3>
             <p className="text-center text-black">🟢 veg 🔴 non-veg</p>
-            <div className="flex mx-30 mb-20 mt-10 font-sans flex-wrap gap-10 justify-center items-center">
+            <div className="flex sm:mx-30 mb-20 mt-10 font-sans flex-wrap gap-10 justify-center items-center">
                 {items ? items?.map((item: ItemType) => (
                     item.type == "burger" &&
                     <Card items={item} key={item._id} />
@@ -25,7 +25,7 @@ export default function Item({items} : {items:ItemType[]}) {
             {/* Pizzas  */}
             <h3 className="text-center mt-15 font-extrabold text-xl text-black">Pizza🍕</h3>
             <p className="text-center text-black">🟢 veg 🔴 non-veg</p>
-            <div className="flex mx-30 mb-20 mt-10 font-sans flex-wrap gap-10 justify-center items-center">
+            <div className="flex sm:mx-30 mb-20 mt-10 font-sans flex-wrap gap-10 justify-center items-center">
                 {items ? items?.map((item: ItemType) => (
                     item.type == "pizza" &&
                     <Card items={item} key={item._id} />
