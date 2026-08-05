@@ -8,7 +8,7 @@ import { Order as OrderType } from "@/types/order.type";
 import { cancelOrder, updateOrderStatus } from "@/base-api/order";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-export const Order = ({ orders, enabled }: { orders: OrderType, enabled: OrderType }) => {
+export const Order = ({ orders, enabled }: { orders: OrderType, enabled: boolean }) => {
     const [item, setItem] = useState<Item>()
     const [open, setOpen] = useState(false)
     const router = useRouter()

@@ -2,14 +2,14 @@ import { getOrders } from "@/base-api/order"
 import { Order } from "@/components/order/Order"
 import { Order as OrderType } from "@/types/order.type"
 const Orders = async () => {
-    const orders = await getOrders()
-    const activeStatuses = [
+    const orders:OrderType[] = await getOrders()
+    const activeStatuses: OrderType["status"][] = [
         "Order Received",
         "Preparing",
         "Out for Delivery",
     ];
-    const hasActiveOrders = orders?.some(order =>
-        activeStatuses.includes(order.status)
+    const hasActiveOrders:boolean = orders?.some(order =>
+        activeStatuses.includes(order?.status)
     );
     console.log(hasActiveOrders)
     return (
