@@ -52,7 +52,7 @@ export const Order = ({ orders, enabled }: { orders: OrderType, enabled: boolean
         const interval = setInterval(() => {
             updateStatus()
             router.refresh();
-        }, 5000);
+        }, 10000);
         router.refresh()
         return () => clearInterval(interval);
     }, [enabled]);
@@ -63,7 +63,7 @@ export const Order = ({ orders, enabled }: { orders: OrderType, enabled: boolean
                 <h2 className="text-black text-center pt-2 font-bold text-md">{orders.user_name}</h2>
                 <div className="flex items-center justify-evenly">
                     <div className="text-center pt-2 text-black">Status: <span className={`${statusColor[orders?.status ?? ""]}`}>{orders.status}</span></div>
-                    {orders?.status == "Cancelled" ? "" : <Btn name="Cancel" onClick={() => handleCancelOrder(orders._id as string)} bgColor="bg-red-600" hover="hover:bg-red-500" />}
+                    {orders?.status == "Cancelled" || orders?.status == "Delivered"  ? "" : <Btn name="Cancel" onClick={() => handleCancelOrder(orders._id as string)} bgColor="bg-red-600" hover="hover:bg-red-500" />}
                 </div>
                 <div className="flex items-center justify-evenly">
                     <h3 className="text-black text-center pt-2">Item: {item?.name}</h3>
