@@ -2,6 +2,7 @@ import { connectDB } from "@/database/db";
 import { Order } from "@/database/schema/order";
 import { NextRequest, NextResponse } from "next/server";
 connectDB()
+export const dynamic = "force-dynamic";
 export const POST = async (req: NextRequest) => {
     try {
         const { user_name, phone, address, total_item, cost, item_id } = await req.json()
@@ -27,7 +28,7 @@ export const POST = async (req: NextRequest) => {
 
 export const GET = async () => {
     try {
-        const orders = await Order.find().sort({ createdAT: -1 }).limit(10)
+        const orders = await Order.find().sort({ createdAt: -1 }).limit(10)
         if (orders.length == 0) {
             return NextResponse.json({ message: "Data not found", status: 400 })
         }
