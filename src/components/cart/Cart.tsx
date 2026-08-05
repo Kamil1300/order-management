@@ -62,7 +62,7 @@ export const Cart = ({ id }: { id: string }) => {
                     <p className="mt-3 text-black">Total Item Quantity: {count}</p>
                     <Btn name="Check Out" isLoading={loading} onClick={() => setOpen(true)} />
                 </div>
-            </div> : <div className="text-center">Oops! Item not found</div>}
+            </div> : <div className="text-center font-bold">Please wait - we are preparing your food...</div>}
             <OrderModal open={open} setOpen={setOpen} item={item as Item} count={count}/>
             </>
     )
